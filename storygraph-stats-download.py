@@ -86,6 +86,6 @@ try:
     download_button.click()
 
     time.sleep(2)
-
+    print("Storygraph download completed successfully!")
 finally:
     driver.quit()

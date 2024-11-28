@@ -46,6 +46,8 @@ print(books_data.isnull().sum())
 
 # In[82]:
 
+#Fills all the columns under Dates Read with the value "Not Read-Not Read"
+#This makes it easier when we split the Dates Read column into start date and end date
 
 books_data['Dates Read'] = books_data['Dates Read'].fillna('Not Read-Not Read')
 print(books_data.isnull().sum())

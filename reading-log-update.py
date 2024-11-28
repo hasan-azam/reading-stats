@@ -1,7 +1,7 @@
 import subprocess
 # Define the scripts to run
-book_update == "book_stats_update_pipeline.py"
-comic_update == "comic_stats_update_pipeline.py"
+book_update = "book_stats_update_pipeline.py"
+comic_update = "comic_stats_update_pipeline.py"
 
 try:
     #Run the book stats update script

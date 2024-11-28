@@ -1,0 +1,7 @@
+#Ignore .env file
+.env
+
+#Ignore data directories
+
+data/raw-data/
+data/cleaned-data/

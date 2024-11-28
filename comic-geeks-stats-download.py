@@ -7,6 +7,19 @@ import time
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 import os
+from dotenv import load_dotenv
+
+#Pulling login credentials from .env file
+load_dotenv()
+
+COMIC_GEEKS_USERNAME = os.getenv("COMIC_GEEKS_USERNAME")
+COMIC_GEEKS_PASSWORD = os.getenv("COMIC_GEEKS_PASSWORD")
+
+#Checks to make sure the credentials got loaded
+
+if not COMIC_GEEKS_USERNAME or not COMIC_GEEKS_PASSWORD:
+    raise ValueError("Email or password not set in .env file!")
+
 
 
 #Setting up the Chrome options for custom download directory
@@ -33,7 +46,7 @@ chrome_options.add_argument("--disable-dev-shm-usage")  # Improve performance in
 
 driver = webdriver.Chrome(options=chrome_options) #uses Chrome as the web driver
 
-comic_geeks_username="hasan"
+
 
 try:
     #Open up the login page
@@ -48,13 +61,13 @@ try:
     #find the username input field and send it my username
     #make this more secure
     username_input = driver.find_element(By.NAME, "username")
-    username_input.send_keys(comic_geeks_username)
+    username_input.send_keys(COMIC_GEEKS_USERNAME)
 
     #find password field and fill it
     #make this more secure
 
     password_input = driver.find_element(By.NAME, "password")
-    password_input.send_keys("_YmKa#r85.xM7DM")
+    password_input.send_keys(COMIC_GEEKS_PASSWORD)
     password_input.send_keys(Keys.RETURN)
 
 
@@ -65,7 +78,7 @@ try:
     )
 
 #take us to download page
-    driver.get(f"https://leagueofcomicgeeks.com/profile/{comic_geeks_username}/import-comics")
+    driver.get(f"https://leagueofcomicgeeks.com/profile/{COMIC_GEEKS_USERNAME}/import-comics")
 
  #Wait for Export Button and clicks it, then waits for generation
     export_button = WebDriverWait(driver, 10).until(

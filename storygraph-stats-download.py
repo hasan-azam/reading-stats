@@ -7,6 +7,18 @@ import time
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 import os
+from dotenv import load_dotenv
+
+#Pulling login credentials from .env file
+load_dotenv()
+
+STORYGRAPH_EMAIL = os.getenv("STORYGRAPH_EMAIL")
+STORYGRAPH_PASSWORD = os.getenv("STORYGRAPH_PASSWORD")
+
+#Checks to make sure the credentials got loaded
+
+if not STORYGRAPH_EMAIL or not STORYGRAPH_PASSWORD:
+    raise ValueError("Email or password not set in .env file!")
 
 
 #Setting up the Chrome options for custom download directory
@@ -24,7 +36,7 @@ chrome_options.add_experimental_option("prefs", {
     "safebrowsing.enabled": True,
 })
 
-chrome_options.add_argument("--headless=new")  # Run Chrome in headless mode
+#chrome_options.add_argument("--headless=new")  # Run Chrome in headless mode
 chrome_options.add_argument("--disable-gpu")  # Disable GPU usage (optional)
 chrome_options.add_argument("--no-sandbox")   # Useful for certain Linux environments
 chrome_options.add_argument("--disable-dev-shm-usage")  # Improve performance in some systems
@@ -47,13 +59,13 @@ try:
     #find the email input field and send it my email
     #make this more secure
     email_input = driver.find_element(By.NAME, "user[email]")
-    email_input.send_keys("hasan1117@gmail.com")
+    email_input.send_keys(STORYGRAPH_EMAIL)
 
     #find password field and fill it
     #make this more secure
 
     password_input = driver.find_element(By.NAME, "user[password]")
-    password_input.send_keys("N@$@h2000!")
+    password_input.send_keys(STORYGRAPH_PASSWORD)
     password_input.send_keys(Keys.RETURN)
 
     #Wait for Dashboard to Load
